@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foodie's Food</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+  <!-- 스크립트 불러오기 -->
+  <script src="/static/js/jquery-3.7.0.min.js"></script>
+  <script src="/static/js/script.js"></script>
+  <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<!--  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>-->
+</head>
+<body>
+
+  <div class="container">
+    <div class="title-main main">
+      <h1 class="title-text-big">이거한번잡숴봐</h1>
+    </div>
+    <div class="content-main main">
+      <div class="select-btn-container-col">
+        <button class="btn-colored start">시작</button>
+        <button class="btn-out-colored see-rank">오늘의 랭킹</button>
+      </div>
+    </div>
+    <!-- 초기화면 컨텐츠 -->
+    <!-- 선택화면 컨텐츠 -->
+    <!-- 제목 -->
+    <div class="title selections" style="display: none;">
+      <h1 class="title-text"></h1>
+    </div>
+    <!-- 중앙 컨텐츠 -->
+    <div class="content selections" style="display: none;">
+      <div class="flex-inner">
+      <!-- 랭킹 -->
+        <div class="rank-box" style="display: none;">
+          <div id="rank-food"><img src="/static/img/loading.gif" alt="추천 중" /></div>
+          <div class="select-btn-container">
+            <button class="btn-colored btn-long go-main">돌아가기</button>
+          </div>
+        </div>
+
+        <!-- 계절 선택 화면 -->
+        <div class="season-selection", style="display: none;">
+          <div class="select-emoji-container">
+            <button class="btn-emoji-img season-btn" id="spring">
+              <img class="select-emoji-img" src="/static/img/season/spring.png" alt="봄" />
+            </button>
+            <button class="btn-emoji-img season-btn" id="summer">
+              <img class="select-emoji-img" src="/static/img/season/summer.png" alt="여름" />
+            </button>
+            <button class="btn-emoji-img season-btn" id="fall">
+              <img class="select-emoji-img" src="/static/img/season/fall.png" alt="가을" />
+            </button>
+            <button class="btn-emoji-img season-btn" id="winter">
+              <img class="select-emoji-img" src="/static/img/season/winter.png" alt="겨울" />
+            </button>
+          </div>
+        </div>
+
+        <!-- 날씨 선택 화면 -->
+        <div class="weather-selection" style="display: none;">
+          <div class="select-emoji-container">  <!-- select-btn-container-emoji를 사용했었음 -->
+            <button class="btn-emoji-img weather-btn" id="sunny">️
+              <img class="select-emoji-img" src="/static/img/weather/sunny.png" alt="맑음" />
+            </button>
+            <button class="btn-emoji-img weather-btn" id="cloudy">
+              <img class="select-emoji-img" src="/static/img/weather/cloudy.png" alt="흐림" />
+            </button>
+            <button class="btn-emoji-img weather-btn" id="rain">
+              <img class="select-emoji-img" src="/static/img/weather/rain.png" alt="비" />
+            </button>
+            <button class="btn-emoji-img weather-btn" id="snow">
+              <img class="select-emoji-img" src="/static/img/weather/snow.png" alt="눈" />
+            </button>
+          </div>
+        </div>
+
+        <!-- 시간대 선택 화면 -->
+        <div class="meals-selection" style="display: none;">
+          <div class="select-emoji-container">
+            <button class="btn-emoji-img meals-btn" id="morning">
+              <img class="select-emoji-img" src="/static/img/meal/morning.png" alt="아침" />
+            </button>
+            <button class="btn-emoji-img meals-btn" id="day">
+              <img class="select-emoji-img" src="/static/img/meal/day.png" alt="점심" />
+            </button>
+            <button class="btn-emoji-img meals-btn" id="evening">
+              <img class="select-emoji-img" src="/static/img/meal/evening.png" alt="저녁" />
+            </button>
+            <button class="btn-emoji-img meals-btn" id="night">
+              <img class="select-emoji-img" src="/static/img/meal/night.png" alt="야식" />
+            </button>
+          </div>
+        </div>
+
+        <!-- 기분 선택 -->
+        <div class="mood-selection" style="display: none;">
+          <div class="select-emoji-container">
+            <button class="btn-emoji-img-small mood-btn " id="happy">
+              <img class="select-emoji-img" src="/static/img/mood/happy.png" alt="좋음" />
+            </button>
+            <button class="btn-emoji-img-small mood-btn" id="sad">
+              <img class="select-emoji-img" src="/static/img/mood/sad.png" alt="슬픔" />
+            </button>
+            <button class="btn-emoji-img-small mood-btn" id="angry">
+              <img class="select-emoji-img" src="/static/img/mood/angry.png" alt="화남" />
+            </button>
+            <button class="btn-emoji-img-small mood-btn" id="sleepy">
+              <img class="select-emoji-img" src="/static/img/mood/sleepy.png" alt="졸림" />
+            </button>
+            <button class="btn-emoji-img-small mood-btn" id="idk">
+              <img class="select-emoji-img" src="/static/img/mood/idk.png" alt="잘 모르겠음" />
+            </button>
+            <button class="btn-emoji-img-small mood-btn" id="sick">
+              <img class="select-emoji-img" src="/static/img/mood/sick.png" alt="아픔" />
+            </button>
+          </div>
+        </div>
+
+        <!-- 알레르기 정보 입력 -->
+        <div class="allergy-selection" style="display: none;">
+          <div class="select-btn-container">
+            <!-- 텍스트박스 -->
+            <p>해당하는 알러지 정보를 <u>모두</u> 선택해주세요.<br /><u>없을 경우</u> [추천받기] 버튼을 눌러주세요.</p>
+            <div class="group-allergy-form">
+              <input type="checkbox" id="메밀" name="allergy" value="메밀">
+              <label for="메밀">메밀</label>
+              <input type="checkbox" id="밀" name="allergy" value="밀">
+              <label for="밀">밀</label>
+              <input type="checkbox" id="대두" name="allergy" value="대두">
+              <label for="대두">대두</label>
+              <input type="checkbox" id="견과류" name="allergy" value="견과류">
+              <label for="견과류">견과류</label>
+              <input type="checkbox" id="복숭아" name="allergy" value="복숭아">
+              <label for="복숭아">복숭아</label>
+              <input type="checkbox" id="토마토" name="allergy" value="토마토">
+              <label for="토마토">토마토</label>
+              <input type="checkbox" id="난류" name="allergy" value="난류">
+              <label for="난류">난류</label>
+              <input type="checkbox" id="우유" name="allergy" value="우유">
+              <label for="우유">우유</label>
+              <input type="checkbox" id="육류" name="allergy" value="육류">
+              <label for="육류">육류</label>
+              <input type="checkbox" id="갑각류" name="allergy" value="갑각류">
+              <label for="갑각류">갑각류</label>
+              <input type="checkbox" id="고등어" name="allergy" value="고등어">
+              <label for="고등어">고등어</label>
+              <input type="checkbox" id="오징어" name="allergy" value="오징어">
+              <label for="오징어">오징어</label>
+              <input type="checkbox" id="조개류" name="allergy" value="조개류">
+              <label for="조개류">조개류</label>
+              <input type="checkbox" id="아황산" name="allergy" value="아황산">
+              <label for="아황산">아황산</label>
+            </div>
+            <button class="btn-colored allergy-btn">추천받기</button>
+          </div>
+        </div>
+
+        <!-- 결과 -->
+        <div class="result" style="display: none;">
+          <!-- 순위 1, 2, 3 -->
+          <!-- 얼마나 추천을 받았는가? 횟수 -->
+          <span class="info-p" style="display: none;"></span>
+          <div id="result-food"></div>
+          <div class="select-btn-container">
+            <div class="result-btn-container" style="display: none;">
+              <button class="btn-colored go-main">돌아가기</button>
+              <button class="btn-out-colored retry">다시 추천받기</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 선택된 음식과 공유기능 -->
+        <div class="selected-food" style="display: none;">
+          <!-- 선택한 음식 -->
+          <div class="selected-food-container"></div>
+          <span>결과 공유하기</span>
+          <div class="select-sns-container">
+            <button id="btn-kakaotalk" class="btn-sns">
+              <img src="/static/img/sns/kakao.png" alt="카카오톡" />
+            </button>
+            <button id="btn-twitter" class="btn-sns">
+              <img src="/static/img/sns/twitter.png" alt="트위터" />
+            </button>
+            <button id="btn-facebook" class="btn-sns">
+              <img src="/static/img/sns/facebook.png" alt="페이스북" />
+            </button>
+          </div>
+          <div class="select-btn-container">
+            <button class="btn-colored btn-long go-main">돌아가기</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

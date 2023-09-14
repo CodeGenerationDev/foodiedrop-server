@@ -1,0 +1,559 @@
+/*
+사용하는 폰트 로딩. font-family 에서 사용하고 싶은 폰트를 불러오면 됩니다.
+h1 {
+    font-family: 'MapleBold', sans-serif;
+}
+이런식으로.
+*/
+@font-face {
+  font-family: 'omyu_pretty';
+  src: url('/static/css/fonts/omyu_pretty.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MapleBold';
+  src: url('/static/css/fonts/MapleBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'MapleLight';
+  src: url('/static/css/fonts/MapleLight.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'omyu_pretty', sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  position: relative;
+  flex-direction: column; /* 세로 방향(column)으로 배치 */
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  border: 2px solid #FFA2A2; /* FFA2A2 색상의 테두리 */
+  border-radius: 10px;
+  width: 55%; /* 전체 너비의 55%를 컨테이너에 할당 */
+  max-width: 550px; /* 최대 너비 설정 */
+  min-width: 400px;
+  margin-top: 20px;
+  box-sizing: border-box; /* 테두리를 포함한 크기 계산 */
+  padding: 20px; /* 내부 여백 */
+  height: 800px;
+  max-height: 1000px;
+  min-height: 700px;
+  overflow: hidden;
+}
+
+.flex-inner {
+  display: flex;
+  flex-direction: column;
+  max-height: 100%;
+  overflow: auto; /* 스크롤이 필요한 경우에만 스크롤바가 나타나도록 설정 */
+}
+
+.title-main {
+  display: flex;
+  flex: 3;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%; /* 컨텐츠 너비 100% */
+  height: 10%;
+  padding: 20px;
+  max-width: 1000px;
+  background-color: #FFFFFF; /* 중앙 컨텐츠도 흰색 배경 */
+}
+
+.content-main {
+  display: flex;
+  flex: 7;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%; /* 컨텐츠 너비 100% */
+  height: 90%;
+  padding: 20px;
+  max-width: 100%;
+  max-height: 90%;
+  background-color: #FFFFFF; /* 중앙 컨텐츠도 흰색 배경 */
+  text-align: center;
+  vertical-align: middle;
+  overflow-y: auto;
+  position: relative;
+}
+
+.title {
+  flex: 1;
+  width: 100%; /* 컨텐츠 너비 100% */
+  height: 20%;
+  padding: 10px;
+  max-width: 1000px;
+  background-color: #FFFFFF; /* 중앙 컨텐츠도 흰색 배경 */
+  text-align: center;
+}
+
+.content {
+  position: relative;
+  display: flex;
+  flex: 9;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%; /* 컨텐츠 너비 100% */
+  height: 90%;
+  padding: 20px;
+  max-width: 100%;
+  max-height: 90%;
+  background-color: #FFFFFF; /* 중앙 컨텐츠도 흰색 배경 */
+  text-align: center;
+  vertical-align: middle;
+  overflow-y: auto;
+}
+
+.title-text {
+  font-family: 'MapleLight', 'serif';
+  font-size: 38pt;
+  font-weight: normal;
+  word-break: keep-all;
+}
+
+.title-text-big {
+  font-family: 'MapleBold', 'serif';
+  font-size: 47pt;
+}
+
+.group-allergy-form {
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 3px;
+  border: 0;
+  background-color: #F6F6F6;
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+}
+
+.group-allergy-form label {
+  flex: 0 0 calc(33.33% - 10px); /* margin 값을 빼줌 */
+  box-sizing: border-box; /* padding과 border를 요소의 너비와 높이에 포함 */
+  margin: 5px;
+}
+
+/* 실제 체크박스를 숨김 */
+.group-allergy-form input[type="checkbox"] {
+  visibility: hidden;
+  position: absolute;
+}
+
+/* 가짜 체크박스 생성 */
+.group-allergy-form label::before {
+  content: "";
+  display: inline-block;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border: 2px solid #000;
+  border-radius: 3px;
+}
+
+/* 체크박스가 선택되었을 때 체크 표시 */
+.group-allergy-form input[type="checkbox"]:checked + label::before {
+  content: "\2714";
+  text-align: center;
+  color: #fa5a5f;
+  line-height: 20px;
+}
+
+/* 라벨 텍스트의 수직 정렬 조정 */
+.group-allergy-form label {
+  vertical-align: middle;
+}
+
+
+/*.rank-box {*/
+/*  display: flex;*/
+/*}*/
+
+.rank-content {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;  /* 자식 요소들을 세로 중앙으로 정렬합니다. */
+  margin: 7px;
+  padding: 5px;
+  border-radius: 10px;
+  background-color: #F6F6F6;
+  height: 120px;
+  width: 350px;
+  font-size: 35px;
+}
+
+.rank-img {
+  height: 120px;
+  width: 120px;
+  transform: translateY(-4px); /* 이미지를 위로 10px 옮깁니다. */
+}
+
+.rank-text-container {
+  display: flex;
+  align-items: center;   /* 텍스트를 세로 중앙으로 정렬합니다. */
+  justify-content: center; /* 텍스트를 가로 중앙으로 정렬합니다. */
+  flex-grow: 1;   /* 남은 공간을 모두 사용하도록 설정합니다. */
+}
+
+.rank-text-container span {
+  font-size: 30pt;
+  font-weight: bold;
+}
+
+.result-food-content {
+  position: relative;
+  display: flex;
+  flex-direction: row; /* items are placed in a row */
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  margin: 10px;
+  border: 0;
+  border-radius: 10px;
+  background-color: #F6F6F6;
+  width: 420px;
+  min-height: 115px; /* minimum height is set, but it will grow as required */
+}
+
+.result-image-container {
+  display: flex; /* enable flex to center the image */
+  align-items: center;   /* centers the image vertically */
+  justify-content: center; /* centers the image horizontally */
+}
+
+.result-image-container img {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.result-text-container {
+  display: flex;
+  flex-direction: column; /* stack items vertically */
+  align-items: center;   /* centers items horizontally */
+  justify-content: center; /* centers items vertically */
+  flex-grow: 1;   /* remaining space is all used */
+}
+
+
+.result-text-container h2 {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  font-size: 25pt;
+}
+
+.result-text-container p {
+  margin-bottom: 0;
+  font-size: 14pt;
+}
+
+.result-text-container a, a:visited, a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.info-p {
+  font-size: 18pt;
+  margin-bottom: 9px;
+}
+
+.selected-food-container {
+  position: relative;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto 1fr auto; /* Rows with 1:3:7 ratio */
+  justify-items: center;
+  align-items: center;
+  padding: 10px;
+  width: 100%;
+  margin: 5px 5px 15%;
+  /*border: 3px solid #FFA2A2;*/
+  border-radius: 10px;
+  background-color: #F6F6F6;
+}
+
+.selected-food-img-container {
+  width: 90%;
+  height: 90%;
+}
+
+.selected-food-img-container img{
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.selected-food-text-container {
+  position: relative;
+  display: grid;
+  /*grid-template-columns: 3fr 7fr; */
+  justify-items: center;
+  align-items: center;
+  /*padding: 10px;*/
+  width: 100%;
+  height: 100%;
+}
+
+.selected-food-text-container h2 {
+  font-size: 30pt;
+  margin: 10px 0 12px 0; /* 위쪽 마진, 오른쪽 마진, 아래쪽 마진, 왼쪽 마진*/
+}
+
+.selected-food-text-container span {
+  font-size: 17pt;
+}
+
+.select-btn-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.select-btn-container-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.result-btn-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.result-btn-container button {
+  width: 48%;
+}
+
+.select-emoji-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  overflow-y: auto;
+}
+
+.select-sns-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  margin-top: 3%;
+  margin-bottom: 5%;
+}
+
+/* 현재는 사용안함. 이미지로 변경하고 다시 select-btn-container로 돌아옴 */
+.select-btn-container-emoji {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  position: absolute; /* content를 기준으로 위치 설정 */
+  top: 0;
+  left: 0;
+}
+
+.btn-colored {
+  margin: 10px;
+  padding: 15px 10px;
+  width: 200px;
+  border: none;
+  border-radius: 5px;
+  background-color: #FD8E91; /* 버튼 배경색 */
+  color: #FFFFFF; /* 버튼 텍스트 색상 */
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'omyu_pretty';
+  font-size: 20pt;
+}
+
+.btn-out-colored {
+  margin: 10px;
+  padding: 15px 10px;
+  width: 200px;
+  border: 2px solid #FD8E91; /* 버튼 테두리 색상 */
+  border-radius: 5px;
+  background-color: transparent; /* 버튼 배경색 투명 */
+  color: #FD8E91; /* 버튼 텍스트 색상 */
+  cursor: pointer;
+  font-weight: bold;
+  font-family: 'omyu_pretty';
+  font-size: 20pt;
+}
+
+.btn-sns {
+  margin: 3px;
+  border: none;
+  background-color: transparent; /* 버튼 배경색 투명 */
+  cursor: pointer;
+}
+
+.btn-sns:not(:last-child) {
+  margin-right: 13px;
+}
+
+.btn-sns img {
+  width: 53px;
+  height: 53px;
+}
+
+
+.btn-emoji-img {
+  width: 200px;
+  height: 200px;
+  margin: 6px;
+  border: 0;
+  cursor: pointer;
+  background-color: initial;
+}
+
+.btn-emoji-img-small {
+  width: 150px;
+  height: 150px;
+  margin: 6px;
+  border: 0;
+  cursor: pointer;
+  background-color: initial;
+}
+
+.btn-long {
+  width: 250px;
+}
+
+/*
+기타
+*/
+
+.select-emoji-img {
+  width: 80%;
+  height: 80%;
+}
+
+.btn-non-color-small {
+  margin: 20px;
+  padding: 0;
+  font-size: 140px;
+  border: 0;
+  cursor: pointer;
+  background-color: initial;
+}
+
+.input-allergy {
+  width: 300px;
+  height: 150px;
+  padding: 10px;
+  border: 1px solid #FFA2A2;
+  border-radius: 5px;
+  /*background-color: #eaf7ea;*/
+  /*color: #333;*/
+  font-size: 14px;
+}
+
+p, span {
+  font-size: 15pt;
+  text-align: center;
+}
+
+.loading-img {
+  width: 200px;
+  height: 200px;
+}
+
+/* 모바일 */
+@media screen and (max-width: 767px) {
+  .container {
+    width: 95%; /* 모바일 화면에 맞게 전체 너비의 90%를 컨테이너에 할당 */
+    min-width: 300px;
+    margin-top: 5px;
+    box-sizing: border-box; /* 테두리를 포함한 크기 계산 */
+    padding: 1px; /* 내부 여백 */
+    height: 700px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .title-text {
+    font-family: 'MapleLight', 'serif';
+    font-size: 36pt;
+    font-weight: normal;
+  }
+
+  .title-text-big {
+    font-family: 'MapleBold', 'serif';
+    font-size: 38pt;
+  }
+
+  .rank-content {
+    padding: 3px;
+    width: 300px;
+    font-size: 30pt;
+  }
+
+  .btn-emoji-img {
+    width: 48%;
+    height: 48%;
+  }
+
+  .btn-emoji-img-small {
+    width: 46%;
+    height: 46%;
+  }
+
+  .loading-img {
+    width: 150px;
+    height: 150px;
+  }
+
+  .result-food-content {
+    width: 300px;
+  }
+
+  .result-image-container img {
+    max-width: 80px;
+    max-height: 80px;
+  }
+
+  .result-btn-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .result-btn-container button {
+    width: 75%;
+  }
+
+  .btn-long {
+    width: 75%;
+  }
+}
